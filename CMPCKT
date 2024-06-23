@@ -1,0 +1,23 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+                       entity compator_4_bit is
+    Port (A3, A2, A1, A0: in STD_LOGIC;
+           B3, B2, B1, B0: in STD_LOGIC;
+           F1, F2, F3: out STD_LOGIC);
+end compator_4_bit;
+architecture Dataflow of compator_4_bit is
+begin
+F1 <= (A3 and not B3) or
+ ((A3 xnor B3) and A2 and not B2) or
+  ((A3 xnor B3) and (A2 xnor B2) and A1 and not B1) or
+   ((A3 xnor B3) and (A2 xnor B2) and (A1 xnor B1) and A0 and not B0);
+
+F2 <= (not A3 and B3) or
+ ((A3 xnor B3) and not A2 and B2) or
+  ((A3 xnor B3) and (A2 xnor B2) and not A1 and B1) or
+   ((A3 xnor B3) and (A2 xnor B2) and (A1 xnor B1) and not A0 and B0);
+
+F3 <= (A3 xnor B3) and (A2 xnor B2) and (A1 xnor B1) and (A0 xnor B0);
+end Dataflow;
+
+
